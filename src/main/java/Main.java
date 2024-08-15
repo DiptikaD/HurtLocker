@@ -14,9 +14,9 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        System.out.println(splitEntries(readRawDataToString()));
+        System.out.println(splitEntries());
 
-        System.out.println(separateToCategories(splitEntries(readRawDataToString())));
+        System.out.println(separateToCategories(splitEntries()));
 //        String[] entries = (new Main().readRawDataToString().split("##|\\^|%|\\*|@|!"));
 //        System.out.println(Arrays.toString(Arrays.stream(entries).toArray()));
 //
@@ -60,7 +60,7 @@ public class Main {
 //        }
     }
 
-    public static ArrayList<String> splitEntries(String string) throws Exception {
+    public static ArrayList<String> splitEntries() throws Exception {
         ArrayList<String> groceries = new ArrayList<>(List.of(readRawDataToString().split("##")));
         return groceries;
     }
@@ -71,19 +71,15 @@ public class Main {
 
         for (String grocery : groceries) {
             String[] splited = grocery.split("[^:.a-zA-Z0-9_]");
-            System.out.println(Arrays.toString(splited));
             String name = "";
             double price = 0.0;
             int err = 0;
             //
             for (String string : splited) {
 
-                System.out.println(nameMatches(string));
                 if (splitFurther(string).length>1){
                      if (splitFurther(string)[1] != null && nameMatches(string)) {
                         name = splitFurther(string)[1];
-                        System.out.println("splited to get the name " + splitFurther(string)[1]);
-                        System.out.println("this is name " + name);
                     } else if (splitFurther(string)[1] != null && priceMatches(string)) {
                         price = Double.parseDouble(splitFurther(string)[1]);
                     }
@@ -97,9 +93,7 @@ public class Main {
             currentPriceCount++;
             realInnerMap.put(price, currentPriceCount);
             weirdMap.put(name, realInnerMap);
-            System.out.println("price " + price);
         }
-        System.out.println("A " + weirdMap.entrySet());
         return weirdMap;
     }
 
