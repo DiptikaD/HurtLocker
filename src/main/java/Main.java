@@ -16,48 +16,8 @@ public class Main {
 
         System.out.println(splitEntries());
 
-        System.out.println(separateToCategories(splitEntries()));
-//        String[] entries = (new Main().readRawDataToString().split("##|\\^|%|\\*|@|!"));
-//        System.out.println(Arrays.toString(Arrays.stream(entries).toArray()));
-//
-//        Map<String, Integer> nameCounter = new HashMap<>();
-//        Map<String, Integer> priceCounter = new HashMap<>();
-//        int errorCounter = 0;
-//
-//        for (String element : entries) {
-//            String[] eachEntry = element.split(";");
-//            String name = "";
-//            String price = "";
-//
-//            for (String each : eachEntry) {
-//                if (each.startsWith("naMe:") || each.startsWith("NAME")) {
-//                    name = each.split(":")[1].trim();
-//                } else if (each.startsWith("price:")) {
-//                    price = each.split(":")[1].trim();
-//                }
-//            }
-//
-//            if (name.isEmpty() || price.isEmpty())  {
-//                errorCounter++;
-//                continue;
-//            }
-//
-//            nameCounter.put(name, nameCounter.getOrDefault(name, 0) + 1);
-//            priceCounter.put(price, priceCounter.getOrDefault(price, 0) + 1);
-//
-//            for (Map.Entry<String, Integer> nameEntry : nameCounter.entrySet()) {
-//                System.out.println("Name: " + nameEntry.getKey() + "\t\tseen:" + nameEntry.getValue() + " times");
-//                System.out.println("============== \t\t ==============");
-//
-//                for (Map.Entry<String, Integer> priceEntry : priceCounter.entrySet()) {
-//                    if (nameEntry.getValue() == priceEntry.getValue()) {
-//                        System.out.println("Price: \t" + priceEntry.getKey() + "\t\tseen: " + priceEntry.getValue() + " times");
-//                    }
-//                }
-//                System.out.println("------------ \t\t --------------");
-//            }
-//            System.out.println("Errors \t\t seen: " + errorCounter + " times");
-//        }
+
+        System.out.println(toStringData(separateToCategories(splitEntries())));
     }
 
     public static ArrayList<String> splitEntries() throws Exception {
@@ -122,5 +82,13 @@ public class Main {
         return false;
     }
 
+    public static String toStringData(Map<String, Map<Double, Integer>> weirdMap){
+
+        for (Map.Entry<String,Map<Double, Integer>> entry : weirdMap.entrySet()){
+            System.out.println("\n \n name = "+ entry.getKey() + "\n=========");
+            System.out.println("price & occurance = " + entry.getValue());
+        }
+        return null;
+    }
 
 }
